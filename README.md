@@ -6,7 +6,7 @@ This is the pure Node API for reading MaxMind DB files. MaxMind DB is a binary f
 Install
 ======
 
-    npm i maxmind-db-reader
+    npm i https://github.com/EaterOfCode/node-maxmind-db/archive/master.tar.gz
     
 Example
 =====
