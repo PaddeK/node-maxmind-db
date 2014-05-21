@@ -1,24 +1,61 @@
-node-maxmind-db
-===============
+# node-maxmind-db
 
 This is the pure Node API for reading MaxMind DB files. MaxMind DB is a binary file format that stores data indexed by IP address subnets (IPv4 or IPv6).
 
-Install
-======
+# WARNING
+
+* `.open(Sync)` needs to be called once before abusing `.getGeoData(Sync)`
+* this is version 0.1.0! the API is not compitable with 0.0.*
+* Most IP's don't seem to have city data in the GeoLite2 City database. Only american cities are present, if your IP is american but not returning a city try to replace the last number of your IP by a 0 (only with a IPv4 address. for IPv6 address it doesn't seem to work).
+
+# Install
 
     npm i https://github.com/EaterOfCode/node-maxmind-db/archive/master.tar.gz
-    
-Example
-=====
+
+# Example
+
+
+## Async
 ```javascript
 // require the db reader
 var mmdbreader = require('maxmind-db-reader');
-//  create new reader from a countries file
-var countries = new mmdbreader('./countries.mmdb');
-// get geo data and console.log it 
-console.log(countries.getGeoData('128.101.101.101'));
+// open database
+mmdbreader.open('./countries.mmdb',function(err,countries){
+    // get geodata
+    countries.getGeoData('128.101.101.101',function(err,geodata){
+        // log data :D
+        console.log(geodata);
+    });
+});
 ```
-It will console log something like this
+
+## Sync
+```javascript
+// require the db reader
+var mmdbreader = require('maxmind-db-reader');
+//  open database
+var countries = mmdbreader.openSync('./countries.mmdb');
+// get geodata
+var geodata = countries.getGeoDataSync('128.101.101.101');
+// log data :D
+console.log(geodata);
+```
+
+## Mixed (Sync init, Async request)
+
+```javascript
+// require the db reader
+var mmdbreader = require('maxmind-db-reader');
+// open database
+var countries = mmdbreader.openSync('./countries.mmdb');
+// get geodata
+countries.getGeoData('128.101.101.101',function(err,geodata){
+    // log data :D
+    console.log(geodata);
+});
+```
+
+## Result
 ```javascript
 {
     "city": {
@@ -100,8 +137,12 @@ It will console log something like this
 }
 ```
 
+# API
 
-WARNING
-====
-
-Most IP's don't seem to have city data in the GeoLite2 City database. Only american cities are present, if your IP is american but not returning a city try to replace the last number of your IP by a 0 (only with a IPv4 address. for IPv6 address it doesn't seem to work).
+`maxmind-db-reader`
+ * `.open (databasePath, callback(err, maxmind-db-reader)) void`
+ * `.openSync (databasePath) maxmind-db-reader`
+ `maxmind-db-reader()`
+ * `.getGeoData (ip, callback(err,geodata)) void`
+ * `.getGeoDataSync (ip) geodata`
+ * `.getDatabaseMetadata() metadata`
