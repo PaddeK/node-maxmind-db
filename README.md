@@ -10,7 +10,7 @@ This is the pure Node API for reading MaxMind DB files. MaxMind DB is a binary f
 
 # Install
 
-    npm i https://github.com/EaterOfCode/node-maxmind-db/archive/master.tar.gz
+    npm i maxmind-db-reader
 
 # Example
 
@@ -142,7 +142,8 @@ countries.getGeoData('128.101.101.101',function(err,geodata){
 `maxmind-db-reader`
  * `.open (databasePath, callback(err, maxmind-db-reader)) void`
  * `.openSync (databasePath) maxmind-db-reader`
- `maxmind-db-reader()`
+
+`maxmind-db-reader()`
  * `.getGeoData (ip, callback(err,geodata)) void`
  * `.getGeoDataSync (ip) geodata`
  * `.getDatabaseMetadata() metadata`
