@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+var readline = require('readline');
+var reader = require('./index');
+var util = require('util');
+var db;
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+if(process.argv.length > 2){
+	try{
+		db = reader.openSync(process.argv.pop());
+	}catch(e){
+		console.log("DB error: " + e.message + '\n');
+	}
+}
+if(!db){
+	console.log("Please select a MaxMind Database file or use the command help\n")
+}
+rl.on('line',line);
+line("help");
+
+function line(talk){
+    var args = talk.trim().split(/\s+/);
+    var cmd = args.shift();
+    if(cmd == 'exit'){
+        rl.close();
+        process.exit();
+    }else if(cmd == 'help'){
+        console.log("MaxMind GeoIP interactive console\n\nthe following commands are available:\nhelp\t\tfor this page\nselect [db]\tto select a MaxMind database file\nexit\t\tto exit this matrix\n[ip]\t\tquery an IP to the selected database\ninfo\t\tget metadata info about the selected database\n")
+    }else if(cmd == 'select'){
+        try{
+            db = reader.openSync(args[0]);
+        }catch(e){
+            console.log("DB error: " + e.message + '\n');
+        }
+    }else if(cmd == 'info'){
+        if(!db){
+            console.log("No database selected\n");
+        }else{
+            console.log(util.inspect(db.getDatabaseMetadata(),{depth:null,colors:true}));
+            console.log('');
+        }
+    }else{
+        if(!db){
+            console.log("No database selected\n");
+        }else
+        try{
+            console.log(util.inspect(db.getGeoDataSync(cmd),{depth:null,colors:true}));
+            console.log('');
+        }catch(e){
+            console.log("Error: " + e.message + '\n');
+        }
+    }
+    rl.prompt();
+}
