@@ -23,7 +23,7 @@ MaxmindDBReader.open = function(database,callback){
 MaxmindDBReader.openSync = function(database){
     var mmdbreader = MaxmindDBReader();
     mmdbreader.reader = Reader.openSync(database);
-    return mmdbreader
+    return mmdbreader;
 }
 
 MaxmindDBReader.prototype.getGeoData = function getGeoData(ipAddress,callback) {
