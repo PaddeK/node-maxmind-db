@@ -1,4 +1,9 @@
 var mmdbreader = require('../index');
+var path = require('path');
+
+var geoDBPath = path.join(__dirname, './data/GeoLite2-City.mmdb');
+var corruptDBPath = path.join(__dirname, './data/GeoLite2-City-Zero.mmdb');
+
 var ipdata = [
 	['8.8.8.8','US'],
 	['2600:1010:b00e:4658:488b:55d4:86a4:3c61','US'],
@@ -17,20 +22,32 @@ var check = function(geo, data){
 	}else{
 		console.log(' '+failed+' couldn\'t read data for '+data[0]+' ('+data[1]+')');
 	}
-}
+};
+
 // SYNC
 console.log('SYNC');
 // open database
-var countries = mmdbreader.openSync('./GeoLite2-City.mmdb');
+var countries = mmdbreader.openSync(geoDBPath);
 ipdata.forEach(function(data,i){
 	// read data
 	var geo = countries.getGeoDataSync(data[0]);
 	check(geo, data);
 });
+
+// SYNC ERROR
+console.log('SYNC ERROR');
+// open database
+try{
+	mmdbreader.openSync(corruptDBPath);
+	console.log(' '+failed+' did not exit with an exception');
+}catch(err) {
+	console.log(' '+passed+' exited with an exception');
+}
+
 // ASYNC
 console.log('ASYNC');
 // open database
-mmdbreader.open('./GeoLite2-City.mmdb',function(err,countries){
+mmdbreader.open(geoDBPath, function(err,countries){
 	if(err){
 		console.log(' '+failed+' Can\'t open database: ' + err.message);
 		return;
@@ -50,4 +67,17 @@ mmdbreader.open('./GeoLite2-City.mmdb',function(err,countries){
 			}
 		};
 	get();
+});
+
+
+// ASYNC ERROR
+console.log('ASYNC ERROR');
+// open database
+
+mmdbreader.open(corruptDBPath, function(err,countries){
+  if(err){
+    console.log(' '+passed+' exited with an error');
+  }else{
+    console.log(' '+failed+' did not exit with an error');
+  }
 });
