@@ -32,7 +32,8 @@
         "email" : "pkloes@web.de"
     },
     "dependencies" : {
-        "big-integer" : ">=1.1.5"
+        "big-integer" : ">=1.1.5",
+        "ip-address": "4.0.0"
     },
     "devDependencies" : {
         "istanbul": "^0.3.13",
