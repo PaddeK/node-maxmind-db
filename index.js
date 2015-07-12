@@ -1,16 +1,17 @@
 'use strict';
 
-var Reader = require('./lib/Reader.js'),
-    MaxmindDBReader;
+var Reader = require('./lib/Reader.js');
 
-MaxmindDBReader = module.exports = function () {
+module.exports = MaxmindDBReader;
+
+function MaxmindDBReader() {
 	// allow creation without 'new' keyword
 	if (!(this instanceof MaxmindDBReader))
 		return new MaxmindDBReader();
-};
+}
 
-MaxmindDBReader.open = function(database,callback){
-    Reader.open(database,function(err, reader){
+MaxmindDBReader.open = function openAsync(database, callback) {
+    Reader.open(database, function(err, reader){
         if(err){
             return callback(err);
         }
@@ -18,16 +19,16 @@ MaxmindDBReader.open = function(database,callback){
         mmdbreader.reader = reader;
         callback(null,mmdbreader);
     });
-}
+};
 
-MaxmindDBReader.openSync = function(database){
+MaxmindDBReader.openSync = function openSync(database) {
     var mmdbreader = MaxmindDBReader();
     mmdbreader.reader = Reader.openSync(database);
     return mmdbreader;
-}
+};
 
-MaxmindDBReader.prototype.getGeoData = function getGeoData(ipAddress,callback) {
-    this.reader.get(ipAddress,callback);
+MaxmindDBReader.prototype.getGeoData = function getGeoData(ipAddress, callback) {
+    this.reader.get(ipAddress, callback);
 };
 
 MaxmindDBReader.prototype.getGeoDataSync = function getGeoDataSync(ipAddress) {
