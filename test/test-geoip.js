@@ -10,8 +10,8 @@ var ipData = [
   {ip: '141.136.120.166', country: 'NL'}
 ];
 
-var syncTest = scotchTape();
-syncTest('Maxmind DB Reader > Sync', function run(it) {
+var runTests = scotchTape();
+runTests('Maxmind DB Reader > Sync', function run(it) {
   it('should successfully handle database', function should(t) {
     var geoIp = mmdbreader.openSync(geoDBPath);
     t.ok(geoIp);
@@ -35,9 +35,7 @@ syncTest('Maxmind DB Reader > Sync', function run(it) {
   });
 });
 
-
-var asyncTest = scotchTape();
-asyncTest('Maxmind DB Reader > Async', function run(it) {
+runTests('Maxmind DB Reader > Async', function run(it) {
   it('should successfully handle database', function should(t) {
     mmdbreader.open(geoDBPath, function open(err, geoIp) {
       t.ok(geoIp);
