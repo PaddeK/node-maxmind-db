@@ -1,22 +1,29 @@
 {
-    "name" : "maxmind-db-reader",
-    "version" : "0.1.1",
-    "description" : "This is the pure Node API for reading MaxMind DB files. MaxMind DB is a binary file format that stores data indexed by IP address subnets (IPv4 or IPv6).",
-    "main" : "./index.js",
-    "contributors": [{
-        "name" : "Patrick Klös",
-        "email" : "pkloes@web.de"
-    },{
-        "name":"Corné 'EaterOfCode' Oppelaar",
-		"email":"hello@eaterofco.de"
-    }],
-    "repository" : {
-        "type" : "git",
-        "url" : "https://github.com/PaddeK/node-maxmind-db"
+    "name": "maxmind-db-reader",
+    "version": "0.2.0",
+    "description": "This is the pure Node API for reading MaxMind DB files. MaxMind DB is a binary file format that stores data indexed by IP address subnets (IPv4 or IPv6).",
+    "main": "./index.js",
+    "contributors": [
+        {
+            "name": "Patrick Klös",
+            "email": "pkloes@web.de"
+        },
+        {
+            "name": "Corné 'EaterOfCode' Oppelaar",
+            "email": "hello@eaterofco.de"
+        },
+        {
+            "name": "Rajesh Segu",
+            "email": "rajesh.segu@gmail.com"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/PaddeK/node-maxmind-db"
     },
-	"bin":{
-		"mmdb-geoip":"./repl"
-	},
+    "bin": {
+        "mmdb-geoip": "./repl"
+    },
     "keywords": [
         "Maxmind",
         "Maxmind DB",
@@ -24,15 +31,25 @@
         "GeoIP2",
         "GeoIP2 Lite"
     ],
-    "author" : {
-        "name" : "Patrick Klös",
-        "email" : "pkloes@web.de"
+    "author": {
+        "name": "Patrick Klös",
+        "email": "pkloes@web.de"
     },
-    "dependencies" : {
-        "big-integer" : ">=1.1.5"
+    "dependencies": {
+        "big-integer": ">=1.1.5",
+        "ip-address": "4.0.0"
     },
-    "devDependencies" : {
-        "path" : "^0.11.14 "
+    "devDependencies": {
+        "istanbul": "^0.3.13",
+        "jshint": "2.4.2",
+        "path": "^0.11.14",
+        "scotch-tape": "0.2.0"
+    },
+    "scripts": {
+        "cover": "istanbul cover --report cobertura --print detail tape -- test/test.js",
+        "cover-html": "istanbul report html",
+        "fast-test": "tape test/test.js",
+        "test": "npm run cover -s"
     },
     "licenses": [
         {
@@ -40,7 +57,7 @@
             "url": "https://github.com/PaddeK/node-maxmind-db/blob/master/LICENSE"
         }
     ],
-    "engine" : {
-        "node" : ">=0.8.0"
+    "engine": {
+        "node": ">=0.8.0"
     }
 }
