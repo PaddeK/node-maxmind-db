@@ -45,3 +45,17 @@ ipParseTest('IPv6', function run(it) {
         t.end();
     });
 });
+
+ipParseTest('IPv4-Mapped IPv6', function run(it) {
+    it('should successfully parse correct formats', function should(t) {
+        t.verifyParse('::ffff:192.0.2.128', new Buffer([0xc0, 0x00, 0x02, 0x80]));
+        t.verifyParse('0:0:0:0:0:FFFF:222.1.41.90', new Buffer([0xde, 0x01, 0x29, 0x5a]));
+        t.end();
+    });
+
+    it('should throw exception on invalid IPv6 address with Embedded IPv4 address', function should(t) {
+        t.verifyParseThrows(':192.0.2.128');
+        t.verifyParseThrows('::ffff:192.0.2.128:');
+        t.end();
+    });
+});
