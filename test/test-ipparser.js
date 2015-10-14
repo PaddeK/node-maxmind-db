@@ -38,9 +38,10 @@ ipParseTest('IPv6', function run(it) {
         t.end();
     });
 
-    it('should throw exception on invalid ipv4 formats', function should(t) {
+    it('should throw exception on invalid ipv6 formats', function should(t) {
         t.verifyParseThrows('myipaddress');
-        t.verifyParseThrows('::ffff:192.0.2.128');
+        t.verifyParseThrows('2001:0db8:85a3:00000000:8a2e:0370:7334');
+        t.verifyParseThrows('2001:db8:85a3:8a2e:370:7334');
         t.end();
     });
 });
