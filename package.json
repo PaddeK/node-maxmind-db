@@ -37,7 +37,7 @@
     },
     "dependencies": {
         "big-integer": ">=1.1.5",
-        "ip-address": "4.0.0"
+        "ip-address": "5.8.0"
     },
     "devDependencies": {
         "istanbul": "^0.3.13",
