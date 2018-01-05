@@ -1,6 +1,6 @@
 {
     "name": "maxmind-db-reader",
-    "version": "0.2.1",
+    "version": "1.0.0",
     "description": "This is the pure Node API for reading MaxMind DB files. MaxMind DB is a binary file format that stores data indexed by IP address subnets (IPv4 or IPv6).",
     "main": "./index.js",
     "contributors": [
@@ -15,6 +15,10 @@
         {
             "name": "Rajesh Segu",
             "email": "rajesh.segu@gmail.com"
+        }, 
+        {
+            "name": "Aleksey Smolenchuk",
+            "email": "lxe@lxe.co"
         }
     ],
     "repository": {
@@ -36,14 +40,14 @@
         "email": "pkloes@web.de"
     },
     "dependencies": {
-        "big-integer": ">=1.1.5",
-        "ip-address": "4.0.0"
+        "big-integer": ">=1.6.26",
+        "ip-address": "5.8.9"
     },
     "devDependencies": {
-        "istanbul": "^0.3.13",
-        "jshint": "2.4.2",
-        "path": "^0.11.14",
-        "scotch-tape": "0.2.0"
+        "istanbul": "^0.4.5",
+        "jshint": "2.9.5",
+        "path": "^0.12.7",
+        "scotch-tape": "0.2.1"
     },
     "scripts": {
         "cover": "istanbul cover --report cobertura --print detail tape -- test/test.js",
@@ -57,7 +61,7 @@
             "url": "https://github.com/PaddeK/node-maxmind-db/blob/master/LICENSE"
         }
     ],
-    "engine": {
-        "node": ">=0.8.0"
+    "engines": {
+        "node": ">=4.0"
     }
 }
