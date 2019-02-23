@@ -37,13 +37,13 @@
     },
     "dependencies": {
         "big-integer": ">=1.1.5",
-        "ip-address": "4.0.0"
+        "ip-address": "^5.8.6"
     },
     "devDependencies": {
-        "istanbul": "^0.3.13",
-        "jshint": "2.4.2",
-        "path": "^0.11.14",
-        "scotch-tape": "0.2.0"
+        "istanbul": "^0.4.5",
+        "jshint": "^2.9.4",
+        "path": "^0.12.7",
+        "scotch-tape": "^0.2.1"
     },
     "scripts": {
         "cover": "istanbul cover --report cobertura --print detail tape -- test/test.js",
